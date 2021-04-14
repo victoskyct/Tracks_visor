@@ -1,6 +1,6 @@
-library(leaflet)
-library(leaflet.extras)
-library(sf)
+require(leaflet)
+require(leaflet.extras)
+require(sf)
 
 rutas <- st_read('rutas_FINAL.shp')
 
