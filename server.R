@@ -3,14 +3,13 @@ require(sf)
 require(leaflet)
 require(leaflet.extras)
 
-rutas<- st_read('rutas_FINAL.shp')
+rutas<- st_read('rutas_FINAL.gpkg')
 
-colnames(rutas) <- c('Nombre', 'Distancia_Km', 'Desnivel_Positivo', 'geometry')
+colnames(rutas) <- c('Nombre', 'Distancia_Km', 'Desnivel_Positivo', 'geom')
 
 
 rutas <- st_transform(rutas, crs="+proj=longlat +datum=WGS84 +no_defs")
-st_geometry(rutas) <- 'geometry'
-
+st_geometry(rutas) <- 'geom'
 
 server <- function(input, output, session) {
 
@@ -49,7 +48,7 @@ server <- function(input, output, session) {
       paste(input$filenames, '.gpx', sep='')
     },
     content = function(file) {
-      write_sf(rutas[rutas$Nombre == input$filenames, ]$geometry, driver='GPX', file)
+      write_sf(rutas[rutas$Nombre == input$filenames, ]$geom, driver='GPX', file)
     }
   )
 }
