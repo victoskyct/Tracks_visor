@@ -2,13 +2,13 @@ require(leaflet)
 require(leaflet.extras)
 require(sf)
 
-rutas <- st_read('rutas_FINAL.shp')
+rutas <- st_read('rutas_FINAL.gpkg')
 
-colnames(rutas) <- c('Nombre', 'Distancia_Km', 'Desnivel_Positivo', 'geometry')
+colnames(rutas) <- c('Nombre', 'Distancia_Km', 'Desnivel_Positivo', 'geom')
 
 
 rutas <- st_transform(rutas, crs="+proj=longlat +datum=WGS84 +no_defs")
-st_geometry(rutas) <- 'geometry'
+st_geometry(rutas) <- 'geom'
 
 
 
